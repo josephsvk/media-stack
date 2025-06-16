@@ -1,0 +1,38 @@
+{
+  "movie": {
+    "min": {
+      "WEBDL-720p": 0.75,
+      "WEBRip-720p": 0.75,
+      "Bluray-720p": 1.5,
+
+      "HDTV-1080p": 2.0,
+      "WEBDL-1080p": 0.75,
+      "WEBRip-1080p": 0.75,
+      "Bluray-1080p": 3.0,
+      "Remux-1080p": 6.0,
+
+      "HDTV-2160p": 5.0,
+      "WEBDL-2160p": 2.0,
+      "WEBRip-2160p": 2.0,
+      "Bluray-2160p": 6.0,
+      "Remux-2160p": 11.0
+    },
+    "max": {
+      "WEBDL-720p": 2.0,
+      "WEBRip-720p": 2.0,
+      "Bluray-720p": 3.5,
+
+      "HDTV-1080p": 4.0,
+      "WEBDL-1080p": 6.0,
+      "WEBRip-1080p": 5.0,
+      "Bluray-1080p": 8.0,
+      "Remux-1080p": 12.0,
+
+      "HDTV-2160p": 8.0,
+      "WEBDL-2160p": 10.0,
+      "WEBRip-2160p": 8.0,
+      "Bluray-2160p": 14.0,
+      "Remux-2160p": 20.0
+    }
+  }
+}

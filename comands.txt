@@ -1,0 +1,40 @@
+docker compose --project-name media-stack down 
+
+docker network create --subnet 172.20.0.0/16 mynetwork
+
+docker compose --profile no-vpn up -d
+
+COMPOSE_PROFILES=no-vpn,recommendarr docker compose up -d
+
+sudo chmod -R 1000 prowlarr
+
+
+###########recyclarr#############
+
+docker exec recyclarr recyclarr sync radarr --config /config/configs/professional-stream.yml
+
+
+###########testy#################
+ 
+test ryhclosti medzi nas a media stack
+iperf3 -c 192.168.31.93
+
+
+##########Mount set ##############
+
+sudo nano /etc/fstab
+
+# omv v mojej sieti 
+# /etc/fstab – správne mounty z OMV NAS
+# /etc/fstab – opravené mounty pre NAS
+# disk 1
+192.168.31.95:/Movies   /mnt/media/Movies   nfs nfsvers=4,rw,noatime,tcp,_netdev,uid=1000,gid=1000 0 0
+192.168.31.95:/Serials  /mnt/media/Serials   nfs nfsvers=4,rw,noatime,tcp,_netdev,uid=1000,gid=1000 0 0
+# disk 2
+192.168.31.95:/Movies2    /mnt/media2/Movies    nfs defaults,nfsvers=4,rw,noatime,tcp,_netdev,uid=1000,gid=1000 0 0
+192.168.31.95:/Serials2   /mnt/media2/Serials   nfs defaults,nfsvers=4,rw,noatime,tcp,_netdev,uid=1000,gid=1000 0 0
+
+
+sudo systemctl daemon-reload
+
+sudo mount -a

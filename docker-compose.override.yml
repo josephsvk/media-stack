@@ -1,0 +1,113 @@
+services:
+
+  qbittorrent:
+    volumes:
+      - ./downloads:/Incomplete
+      - /mnt/media/Movies:/mnt/media/Movies
+      - /mnt/media/Serials:/mnt/media/Serials
+
+      - /mnt/media2/Movies:/mnt/media2/Movies
+      - /mnt/media2/Serials:/mnt/media2/Serials
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+  radarr:
+    volumes:
+      - /mnt/media/Movies:/mnt/media/Movies
+      - /mnt/media2/Movies:/mnt/media2/Movies
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+
+  sonarr:
+    volumes:
+      - /mnt/media/Serials:/mnt/media/Serials
+      - /mnt/media2/Serials:/mnt/media2/Serials
+      
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+  jellyfin:
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "105"
+    
+    volumes:
+      - /mnt/media/Movies:/mnt/media/Movies
+      - /mnt/media/Serials:/mnt/media/Serials
+
+      - /mnt/media2/Serials:/mnt/media2/Serials
+      - /mnt/media2/Media:/mnt/media2/Movies
+      
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+  jellyseerr:
+    volumes:
+      - ./config/jellyseerr:/app/config
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - radarr-config:/config
+      - /mnt/media/Movies:/mnt/media/Movies
+      - /mnt/media/Serials:/mnt/media/Serials
+      - /mnt/media/TvShows:/mnt/media/TvShows
+    ports:
+      - 6767:6767
+    networks:
+      - mynetwork   # Comment this line if VPN is enabled
+    restart: unless-stopped
+
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr:latest
+    container_name: recyclarr
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - ./config/recyclarr:/config
+    depends_on:
+      - radarr
+      - sonarr
+    restart: unless-stopped
+    networks:
+      - mynetwork   # Comment this line if VPN is enabled
+
+  flaresolverr:
+    # DockerHub mirror flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=${TZ}
+    ports:
+      - "${PORT:-8191}:8191"
+    restart: unless-stopped
+
+volumes:
+  media:
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=${NAS_IP},rw,noatime
+      device: ":/srv/dev-disk-by-uuid-1234/media"

@@ -1,0 +1,145 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/recyclarr/recyclarr/master/schemas/config-schema.json
+radarr:
+  streaming-1080-2160p:
+    base_url: http://radarr:7878
+    api_key: 77e283a99d89422a81f41376c297df43
+
+    quality_definition:
+      type: movie
+      preferred_ratio: 0.1
+
+    replace_existing_custom_formats: true
+
+    quality_profiles:
+      - name: "1080-2160p Streaming Optimized"
+        reset_unmatched_scores:
+          enabled: true
+        upgrade:
+          allowed: true
+          until_quality: WEBDL-2160p
+        min_format_score: 0
+        quality_sort: top
+        qualities:
+          - name: WEBDL-2160p
+          - name: WEBRip-2160p
+          - name: Bluray-2160p
+          - name: HDTV-2160p
+          - name: WEBDL-1080p
+          - name: WEBRip-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+
+    custom_formats:
+    # 1) WEB Tier 01 – Najvyššia priorita pre rýchle streamingové releasy (napr. WEBDL-2160p s najlepším audio kvalifikátorom)
+    - trash_ids:
+        - c20f169ef63c5f40c2def54abaf4438e  # Identifikátor pre WEB Tier 01 (top WEB zdroj)
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: 2000  # Najvyššie skóre, zaručuje, že sa tieto releasy vždy vyberú pred ostatnými
+
+    # 2) WEB Tier 02 – Druhá najvyššia priorita pre streaming (mierne nižšia kvalita/rýchlosť než Tier 01)
+    - trash_ids:
+        - 403816d65392c79236dcb6dd591aeda4  # Identifikátor pre WEB Tier 02
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: 1700  # Niečo nižšie než Tier 01, ale stále privilegované
+
+    # 3) WEB Tier 03 – Tretia najvyššia priorita pre streaming (ľahko znižuje kvalitu/rýchlosť)
+    - trash_ids:
+        - af94e0fe497124d1f9ce732069ec8c3b  # Identifikátor pre WEB Tier 03
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: 1400  # Vhodné, ak Tier 01/02 nie sú dostupné
+
+    # 4) HEVC / x265 HD – Moderný, efektívny codec s dobrou kvalitou pri menšom filesize
+    - trash_ids:
+        - dc98083864ea246d05a42df0d05f81cc  # Identifikátor pre x265 (HD) releasy
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: 1000  # Preferencia pre tých, čo chcú HEVC napriek limitovanej rýchlosti
+
+    # 5) Blu-Ray / Remux / UHD – Najvyššia kvalita disku, no väčšie súbory a pomalšie sťahovanie
+    - trash_ids:
+        - ed27ebfef2f323e964fb1f61391bcb35  # HD Bluray Tier 01
+        - c20c8647f2746a1f4c4262b0fbbeeeae  # HD Bluray Tier 02
+        - 5608c71bcebba0a5e666223bae8c9227  # HD Bluray Tier 03
+        - 3a3ff47579026e76d6504ebea39390de  # Remux Tier 01
+        - 9f98181fe5a3fbeb0cc29340da2a468a  # Remux Tier 02
+        - 8baaf0b3142bf4d94c42a724f034e27a  # Remux Tier 03
+        - 4d74ac4c4db0b64bff6ce0cffef99bf0  # UHD Bluray Tier 01
+        - a58f517a70193f8e578056642178419d  # UHD Bluray Tier 02
+        - e71939fae578037e7aed3ee219bbe7c1  # UHD Bluray Tier 03
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: 800  # Vysoká kvalita, ale menej preferované než rýchle WEB releasy
+
+    # 6) Štandardné WEBDL / WEBRip-1080p – Bežné streamingové releasy so štandardným audio formátom
+    - trash_ids:
+        - 1c1a4c5e823891c75bc50380a6866f73  # DTS audio stopa
+        - 240770601cc226190c367ef59aba7463  # AAC audio stopa
+        - 417804f7f2c4308c1f4c5d380d4c4475  # AC3 audio stopa
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: 400  # Ak nie sú dostupné lepšie zdroje, tieto budú vybrané
+
+    # 7) Záložka (prázdny) – Umožní vybrať akýkoľvek iný zdroj, ak neexistuje nič iné
+    - trash_ids: []  # Nešpecifikuje žiadne ID – označí všetky ostatné releasy
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: 50   # Minimálne skóre, zaručí aspoň nejaký download
+
+    # 8) Mierne potlačené formáty (HDR, remastery, špecial editions) – Menej preferované kvôli možným problémom s prehrávaním alebo zmene kvality
+    - trash_ids:
+        - 0f12c086e289cf966fa5948eac571f44  # Hybrid
+        - 570bc9ebecd92723d2d21500f4be314c  # Remaster
+        - eca37840c13c6ef2dd0262b141a5482f  # 4K Remaster
+        - e0c07d59beb37348e975a930d5e50319  # Criterion Collection
+        - 9d27d9d2181838f76dee150882bdc58c  # Masters of Cinema
+        - db9b4c4b53d312a3ca5f1378f6440fc9  # Vinegar Syndrome
+        - 957d0f44b592285f26449575e8b1167e  # Special Edition
+        - eecf3a857724171f968a66cb5719e152  # IMAX
+        - 9f6cbff8cfe4ebbc1bde14c7b7bec0de  # IMAX Enhanced
+        - 58d6a88f13e2db7f5059c41047876f00  # DV
+        - e23edd2482476e595fb990b12e7c609c  # DV HDR10
+        - c53085ddbd027d9624b320627748612f  # DV HDR10+
+        - 55d53828b9d81cbe20b02efd00aa0efd  # DV HLG
+        - a3e19f8f627608af0211acd02bf89735  # DV SDR
+        - e61e28db95d22bedcadf030b8f156d96  # HDR
+        - 2a4d9069cc1fe3242ff9bdaebed239bb  # HDR (undefined)
+        - dfb86d5941bc9075d6af23b09c2aeecd  # HDR10
+        - b974a6cd08c1066250f1f177d7aa1225  # HDR10+
+        - 9364dd386c9b4a1100dde8264690add7  # HLG
+        - 08d6d8834ad9ec87b1dc7ec8148e7a1f  # PQ
+        - f700d29429c023a5734505e77daeaea7  # DV (Disk)
+        - 923b6abef9b17f937fab56cfcf89e1f1  # DV (WEBDL)
+        - 55a5b50cb416dea5a50c4955896217ab  # DV HDR10+ Boost
+        - b17886cb4158d9fea189859409975758  # HDR10+ Boost
+        - 9c38ebb7384dada637be8899efa68e6f  # SDR
+        - 25c12f78430a3a23413652cbd1d48d77  # SDR (no WEBDL)
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: -200  # Mierne záporné, bude vybrané len ak nie je nič iné
+
+    # 9) Veľmi potlačené / nechcené (3D, LQ, neangličtina, extras, upscaley) – Tieto tagy chceme úplne vylúčiť
+    - trash_ids:
+        - b6832f586342ef70d9c128d40c07b872  # Bad Dual Groups
+        - 7357cf5161efbf8c4d5d0c30b4815ee2  # Obfuscated
+        - b8cd450cbfa689c0259a01d9e29ba3d6  # 3D
+        - cae4ca30163749b891686f95532519bd  # AV1
+        - ed38b889b31be83fda192888e2286d83  # BR-DISK
+        - 0a3f082873eb454bde444150b70253cc  # Extras
+        - e6886871085226c3da1830830146846c  # Generated Dynamic HDR
+        - 90a6f9a284dff5103f6346090e6280c8  # LQ
+        - e204b80c87be9497a8a6eaff48f72905  # LQ (Release Title)
+        - 712d74cd88bceb883ee32f773656b1f5  # Sing-Along Versions
+        - bfd8eb01832d646a0a89c4deb46f8564  # Upscaled
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: -1000  # Veľmi negatívne, takmer nikdy sa nevyberie
+
+    # 10) SK/CZ verzie (Language: Not English) – Najvyššia priorita, aby vždy mali slovenské/české titulky
+    - trash_ids:
+        - 0dc8aec3bd1c47cd6c40c46ecd27e846  # Language: Not English (SK/CZ verzie)
+      assign_scores_to:
+        - name: "1080-2160p Streaming Optimized"
+          score: 2100  # Prekoná všetky ostatné anglické releasy

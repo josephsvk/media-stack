@@ -1,0 +1,151 @@
+{
+  "trash_id_mappings": [
+    {
+      "trash_id": "e6258996055b9fbab7e9cb2f75819294",
+      "custom_format_name": "WEB Tier 01",
+      "custom_format_id": 6
+    },
+    {
+      "trash_id": "9c11cd3f07101cdba90a2d81cf0e56b4",
+      "custom_format_name": "LQ",
+      "custom_format_id": 8
+    },
+    {
+      "trash_id": "fbcb31d8dabd2a319072b84fc0b7249c",
+      "custom_format_name": "Extras",
+      "custom_format_id": 11
+    },
+    {
+      "trash_id": "15a05bc7c1a36e2b57fd628f8977e2fc",
+      "custom_format_name": "AV1",
+      "custom_format_id": 12
+    },
+    {
+      "trash_id": "58790d4e2fdcd9733aa7ae68ba2bb503",
+      "custom_format_name": "WEB Tier 02",
+      "custom_format_id": 33
+    },
+    {
+      "trash_id": "d84935abd3f8556dcd51d4f27e22d0a6",
+      "custom_format_name": "WEB Tier 03",
+      "custom_format_id": 34
+    },
+    {
+      "trash_id": "c9eafd50846d299b862ca9bb6ea91950",
+      "custom_format_name": "x265",
+      "custom_format_id": 36
+    },
+    {
+      "trash_id": "d6819cba26b1a6508138d25fb5e32293",
+      "custom_format_name": "HD Bluray Tier 01",
+      "custom_format_id": 37
+    },
+    {
+      "trash_id": "c2216b7b8aa545dc1ce8388c618f8d57",
+      "custom_format_name": "HD Bluray Tier 02",
+      "custom_format_id": 38
+    },
+    {
+      "trash_id": "9965a052eb87b0d10313b1cea89eb451",
+      "custom_format_name": "Remux Tier 01",
+      "custom_format_id": 39
+    },
+    {
+      "trash_id": "8a1d0c3d7497e741736761a1da866a2e",
+      "custom_format_name": "Remux Tier 02",
+      "custom_format_id": 40
+    },
+    {
+      "trash_id": "1bef6c151fa35093015b0bfef18279e5",
+      "custom_format_name": "2160p",
+      "custom_format_id": 41
+    },
+    {
+      "trash_id": "5964f2a8b3be407d083498e4459d05d0",
+      "custom_format_name": "DTS",
+      "custom_format_id": 42
+    },
+    {
+      "trash_id": "a50b8a0c62274a7c38b09a9619ba9d86",
+      "custom_format_name": "AAC",
+      "custom_format_id": 43
+    },
+    {
+      "trash_id": "dbe00161b08a25ac6154c55f95e6318d",
+      "custom_format_name": "DD",
+      "custom_format_id": 44
+    },
+    {
+      "trash_id": "6d0d8de7b57e35518ac0308b0ddf404e",
+      "custom_format_name": "DV",
+      "custom_format_id": 45
+    },
+    {
+      "trash_id": "7878c33f1963fefb3d6c8657d46c2f0a",
+      "custom_format_name": "DV HDR10",
+      "custom_format_id": 46
+    },
+    {
+      "trash_id": "2b239ed870daba8126a53bd5dc8dc1c8",
+      "custom_format_name": "DV HDR10\u002B",
+      "custom_format_id": 47
+    },
+    {
+      "trash_id": "1f733af03141f068a540eec352589a89",
+      "custom_format_name": "DV HLG",
+      "custom_format_id": 48
+    },
+    {
+      "trash_id": "27954b0a80aab882522a88a4d9eae1cd",
+      "custom_format_name": "DV SDR",
+      "custom_format_id": 49
+    },
+    {
+      "trash_id": "3e2c4e748b64a1a1118e0ea3f4cf6875",
+      "custom_format_name": "HDR",
+      "custom_format_id": 50
+    },
+    {
+      "trash_id": "bb019e1cd00f304f80971c965de064dc",
+      "custom_format_name": "HDR (undefined)",
+      "custom_format_id": 51
+    },
+    {
+      "trash_id": "3497799d29a085e2ac2df9d468413c94",
+      "custom_format_name": "HDR10",
+      "custom_format_id": 52
+    },
+    {
+      "trash_id": "a3d82cbef5039f8d295478d28a887159",
+      "custom_format_name": "HDR10\u002B",
+      "custom_format_id": 53
+    },
+    {
+      "trash_id": "17e889ce13117940092308f48b48b45b",
+      "custom_format_name": "HLG",
+      "custom_format_id": 54
+    },
+    {
+      "trash_id": "23297a736ca77c0fc8e70f8edd7ee56c",
+      "custom_format_name": "Upscaled",
+      "custom_format_id": 55
+    },
+    {
+      "trash_id": "e1a997ddb54e3ecbfe06341ad323c458",
+      "custom_format_name": "Obfuscated",
+      "custom_format_id": 56
+    },
+    {
+      "trash_id": "69aa1e159f97d860440b04cd6d590c4f",
+      "custom_format_name": "Language: Not English",
+      "custom_format_id": 57
+    },
+    {
+      "trash_id": "c99279ee27a154c2f20d1d505cc99e25",
+      "custom_format_name": "720p",
+      "custom_format_id": 58
+    }
+  ],
+  "version": 1,
+  "instance_name": "streaming-1080-2160p"
+}
