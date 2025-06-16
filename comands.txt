@@ -38,3 +38,10 @@ sudo nano /etc/fstab
 sudo systemctl daemon-reload
 
 sudo mount -a
+
+############### git ##################
+
+git pull upstream main
+
+git fetch upstream
+git diff main upstream/main
