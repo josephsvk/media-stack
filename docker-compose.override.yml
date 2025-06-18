@@ -2,7 +2,7 @@ services:
 
   qbittorrent:
     volumes:
-      - ./downloads:/Incomplete
+      - ./downloads/Incomplete:/Incomplete
       - /mnt/media/Movies:/mnt/media/Movies
       - /mnt/media/Serials:/mnt/media/Serials
 
@@ -17,6 +17,8 @@ services:
     volumes:
       - /mnt/media/Movies:/mnt/media/Movies
       - /mnt/media2/Movies:/mnt/media2/Movies
+      - ./downloads/Incomplete:/Incomplete
+
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -27,7 +29,8 @@ services:
     volumes:
       - /mnt/media/Serials:/mnt/media/Serials
       - /mnt/media2/Serials:/mnt/media2/Serials
-      
+      - ./downloads/Incomplete:/Incomplete
+
 
     environment:
       - PUID=${PUID}
