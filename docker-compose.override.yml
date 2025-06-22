@@ -108,6 +108,23 @@ services:
       - "${PORT:-8191}:8191"
     restart: unless-stopped
 
+  tdarr:
+    image: haveagitgat/tdarr:latest
+    container_name: tdarr
+    ports:
+      - "8265:8265"  # UI
+      - "8266:8266"  # Server
+    volumes:
+      - /mnt/media/Movies:/mnt/media/Movies
+      - /mnt/media/Serials:/mnt/media/Serials
+
+      - /mnt/media2/Serials:/mnt/media2/Serials
+      - /mnt/media2/Media:/mnt/media2/Movies
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
 volumes:
   media:
     driver_opts:
